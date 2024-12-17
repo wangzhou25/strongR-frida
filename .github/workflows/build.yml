@@ -129,12 +129,12 @@ jobs:
       run: |
         git config --global user.email "$wangzhou_25@163.com"
         git config --global user.name "wangzhou25"
-        git clone https://github.com/wangzhou25/strongR-frida
+        git clone ${{ secrets.FRIDA_PATCH_REPO }}
         export ANDROID_NDK_ROOT=${{ steps.setup-ndk.outputs.ndk-path }}
         git clone --recurse-submodules https://github.com/frida/frida
         cd frida/subprojects/frida-core
-        git am ../../../strongR-frida/frida-core/*.patch
-        cd ../
+        git am ../../../frida-patch-files/frida-core/*.patch
+        cd ../../
         make core-android-arm
         make core-android-arm64
         make core-android-x86
