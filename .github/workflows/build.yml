@@ -77,11 +77,6 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [check_version, create_release]
 
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-
     steps:
     - uses: actions/checkout@v2.3.4
 
@@ -134,18 +129,16 @@ jobs:
       run: |
         git config --global user.email "$wangzhou_25@163.com"
         git config --global user.name "wangzhou25"
-        git clone ${{ secrets.FRIDA_PATCH_REPO }}
+        git clone https://github.com/wangzhou25/strongR-frida.git
         export ANDROID_NDK_ROOT=${{ steps.setup-ndk.outputs.ndk-path }}
         git clone --recurse-submodules https://github.com/frida/frida
         cd frida/subprojects/frida-core
-        git am ../../../frida-patch-files/frida-core/*.patch
+        git am ../../../strongR-frida/frida-core/*.patch
         cd ../../
         make core-android-arm
         make core-android-arm64
         make core-android-x86
         make core-android-x86_64
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Check release version
       id: checkReleaseVersion
