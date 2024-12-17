@@ -101,7 +101,7 @@ jobs:
         python-version: 3.8
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v2
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.0
     
