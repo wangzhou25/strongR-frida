@@ -104,15 +104,24 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.0
+
+    - name: Check Ruby version
+      run: |
+        echo "Checking Ruby version:"
+        rbuy -v
     
+    - name: Ensure Ruby 3.2.0 is in PATH
+      run: |
+        echo "Ruby version in PATH:"
+        which ruby
+        ruby -v
+
     - name: install dependencies
       run: |
         sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install build-essential tree ninja-build gcc-multilib g++-multilib lib32stdc++-9-dev flex bison xz-utils python3-requests python3-setuptools python3-dev python3-pip libc6-dev libc6-dev-i386 -y
-        echo "ruby version:"
-        ruby -v
-        sudo gem update --system
-        sudo gem install ffi -v 1.17.0
-        sudo gem install fpm -v 1.11.0 --no-document
+        gem update --system
+        gem install ffi -v 1.17.0
+        gem install fpm -v 1.11.0 --no-document
         python3 -m pip install lief
       
     - name: build frida for Android
