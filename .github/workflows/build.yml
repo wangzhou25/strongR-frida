@@ -108,7 +108,7 @@ jobs:
     - name: Check Ruby version
       run: |
         echo "Checking Ruby version:"
-        rbuy -v
+        ruby -v
     
     - name: Ensure Ruby 3.2.0 is in PATH
       run: |
