@@ -135,11 +135,16 @@ jobs:
         cd frida/subprojects/frida-core
         git am ../../../strongR-frida/frida-core/*.patch
         cd ../../
-        make core-android-arm
-        make core-android-arm64
-        make core-android-x86
-        make core-android-x86_64
-        
+
+    - name: Configure
+      shell: bash
+      run: |
+          cd frida
+          ./configure  --host=android-${{ matrix.arch }} --enable-portal -- -Dfrida-gum:devkits=gum,gumjs -Dfrida-core:devkits=core
+
+    - name: Compile
+      run: make
+
     - name: Check release version
       id: checkReleaseVersion
       uses: actions/github-script@v3.1.0
