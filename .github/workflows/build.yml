@@ -103,7 +103,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        python-version: 3.2.0
+        ruby-version: 3.2.0
     
     - name: install dependencies
       run: |
