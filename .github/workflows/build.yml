@@ -140,7 +140,7 @@ jobs:
       shell: bash
       run: |
           cd frida
-          ./configure  --host=android-${{ matrix.arch }} --enable-portal -- -Dfrida-gum:devkits=gum,gumjs -Dfrida-core:devkits=core
+          ./configure --without-prebuilds=sdk:host
 
     - name: Compile
       run: make
